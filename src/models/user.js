@@ -1,4 +1,4 @@
-import {query} from "../services/user";
+import {query,logout} from "../services/user";
 
 export default {
   namespace: 'user',
@@ -15,7 +15,7 @@ export default {
         type: 'save',
         payload: response,
       });
-    }
+    },
   },
 
   reducers: {

@@ -1,27 +1,48 @@
 import React from "react";
-import { Menu, Dropdown, Icon } from 'antd';
+import {Menu, Dropdown, Icon} from 'antd';
+import {connect} from "dva";
+import {logout,login} from "../../services/user";
 import "./topbar.css";
 
+@connect()
+export default class TopBar extends React.Component {
+  constructor(props){
+    super(props);
+    this.logoutAccout = this.logoutAccout.bind(this);
+  }
 
-export default class TopBar extends React.Component{
-  render(){
-    return(
+  /*登出账号*/
+  logoutAccout(){
+   logout()
+  }
+
+  //登录账号
+  loginAccount(){
+    login();
+  }
+
+
+  render() {
+    let user = this.props.data;
+    return (
       <div className="container">
         <span className="welcome">欢迎光临工业魔方-智能方案解决中心</span>
-        {/*<div className="login-register">
-          <a href="javascript:;">登录</a>
-           <span>｜</span>
-          <a href="javascript:;">注册</a>
-        </div>*/}
-        <div className="topBar-right">  
-                  <div className="user-login">
-                    <Icon type="user" style={{fontSize:'14px',marginRight:'5px'}} />
-                    <span>152656121</span>
-                    <Icon type="down" style={{fontSize:'12px',marginRight:'5px'}} className="arrow"/>
-                  </div>
-                  <div className="logo-out">退出登录</div>  
-                </div>
-
+        {
+          user.id ?
+            <div className="topBar-right">
+              <div className="user-login">
+                <Icon type="user" style={{fontSize: '14px', marginRight: '5px'}}/>
+                <span>{user.username}</span>
+                <Icon type="down" style={{fontSize: '12px', marginRight: '5px'}} className="arrow"/>
+              </div>
+              <div className="logo-out" onClick={this.logoutAccout}>退出登录</div>
+            </div> :
+            <div className="login-register">
+              <a onClick={this.loginAccount}>登录</a>
+              <span>｜</span>
+              <a href="javascript:;">注册</a>
+            </div>
+        }
       </div>
     )
   }
