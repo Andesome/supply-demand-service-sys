@@ -91,26 +91,27 @@ class NormalRequestForm extends React.Component {
     });
 
   //  上传10条假数据
-  /*  const fakeData = {
+    /*const fakeData = {
       company: "测试公司",
-      desc: "测试描述测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试",
+      desc: "测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情测试内容详情",
       except_cycle: "1",
-      file_url: "kong",
-      link_man: "11",
+      file_url: "",
+      link_man: "3l先生",
       mobile: "13574488306",
       req_type: "other",
-      user_id: "1"
+      user_id: window.sessionStorage.getItem('user_id')
     };
     for(let i =0;i<10;i++){
       this.props.dispatch({
         type: 'demand/postDemand',
         payload: {
           ...fakeData,
-          title:`测试${i+1}`,
+          title:`这是一条测试需求，编号${i+1}`,
           budget:Math.random()*1000>>0
         }
       });
     }*/
+
   }
 
   render() {

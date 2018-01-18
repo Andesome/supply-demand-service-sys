@@ -2,6 +2,7 @@ import React from "react";
 import "./demand-list.less";
 import {withRouter} from "dva/router";
 import {connect} from "dva";
+import {timeStampToDate} from "../../utils/tools";
 import {Button, Modal,message,Badge} from "antd";
 const confirm = Modal.confirm;
 
@@ -32,7 +33,7 @@ class ListItem extends React.Component{
   // 跳转到对应需求详情页
   jumpToDetail(req_id){
     if(this.props.viewOnly){
-      this.props.history.push("/detail?viewOnly=on&req_id="+req_id);
+      this.props.history.push("/me/req?viewOnly=on&req_id="+req_id);
     }else{
       this.props.history.push("/detail?req_id="+req_id);
     }
@@ -155,7 +156,7 @@ class ListItem extends React.Component{
                 <Badge count={getReqStatus(data.status)} style={data.status==1?styles.pass:styles.reviewing}>
                   {data.title}
                 </Badge>:
-                <span>{'用户需求标题'}</span>
+                <span>{data.title}</span>
             }
 
            <span className={`type ${this.props.viewOnly?'':'active'}`} style={{float: 'right'}}>{getReqType(data.req_type)}</span>
@@ -171,7 +172,7 @@ class ListItem extends React.Component{
         <div className='ft demand-remark'>
           <span>26 次浏览</span>
           {/*<span>9 个公司提供方案</span>*/}
-          <span>{data.created_time}</span>
+          <span>{timeStampToDate(data.created_time*1000).timeStr}</span>
           {
             this.props.location.pathname === "/me"?
               ( <div className='ly-btn-group'>

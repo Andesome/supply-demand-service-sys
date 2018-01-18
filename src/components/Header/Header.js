@@ -12,7 +12,9 @@ export default class Header extends React.Component {
   componentDidMount() {
     console.log("头部渲染好了");
     this.props.dispatch({
-      type: 'demand/getAllDemands'
+      type: 'demand/getAllDemands',
+      offset:'0',
+      limit:'15'
     });
   }
 

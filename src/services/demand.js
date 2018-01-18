@@ -25,20 +25,21 @@ export async function postDemand(data) {
 }
 
 //获取所有需求
-export async function getAllDemand() {
+export async function getAllDemand(offset,limit) {
   let access_token = Cookies.get("access_token");
   return axios({
     method: 'get',
-    url: URL1 + '/api/reqs',
+    url: URL1 + `/api/reqs?offset=${offset}&limit=${limit}`,
     headers: {
-      Authorization: access_token
+      Authorization: access_token,
     },
   }).then((response) => {
-    // console.log("需求列表",response);
-    const {status,statusText} = response;
+    console.log("获取所有需求列表响应：",response);
+    const {status,statusText,headers} = response;
     return Promise.resolve({
       status,
       statusText,
+      headers,
       ...response.data
     })
   })

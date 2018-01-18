@@ -15,31 +15,7 @@ class SolutionPage extends React.Component{
 
   render(){
     let data = this.props.data;
-    /*let data = [{
-      title:'需求1',
-      id: 1,
-      desc:'需求1需求1需求1需求1需求1需求1需求1需求1需求1需求1描述',
-      budget: "1000.00",
-      except_cycle: 1,
-      req_type: "si",
-      created_time: "2018-01-10 10:51:23"
-    },{
-      title:'需求1',
-      id: 2,
-      desc:'需求1需求1需求1需求1需求1需求1需求1需求1需求1需求1描述',
-      budget: "1000.00",
-      except_cycle: 1,
-      req_type: "si",
-      created_time: "2018-01-10 10:51:23"
-    },{
-      title:'需求1',
-      id: 3,
-      desc:'需求1需求1需求1需求1需求1需求1需求1需求1需求1需求1描述',
-      budget: "1000.00",
-      except_cycle: 1,
-      req_type: "si",
-      created_time: "2018-01-10 10:51:23"
-    }]*/
+
     //将服务器代码转换成需求状态
     function getReqStatus(code) {
       switch (code){
@@ -54,25 +30,11 @@ class SolutionPage extends React.Component{
     // console.log("SolutionPage:",data);
     return(
       <div className='solution-box'>
-       {/* {
+        {
           data.length<1?
             <TipPanel tip="你还没有提交过方案"/>:
-          data.map((val,key)=>(
-            <Card
-              title={val.title}
-              extra={getReqStatus(val.status)}
-              style={{ width: 300}}
-              className='card-item'
-              key={key}
-            >
-              <p>
-                {val.desc}
-                <More req_id={val.req_id} solution_id={val.id}/>
-              </p>
-            </Card>
-          ))
-        }*/}
-        <MySolutionList data={data} viewOnly={true} />
+            <MySolutionList data={data} viewOnly={true} />
+        }
       </div>
     )
   }

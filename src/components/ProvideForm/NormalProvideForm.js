@@ -107,10 +107,13 @@ class NormalProvideForm extends React.Component {
 
     // 改变方案描述内容
     let _this = this;
-    setTimeout(function () {
-      // console.log("componentDidMount",_this.state);
-      _this.handleSelectChange(_this.state.desc);
+    let showContent = (this.props.viewOnly === 'on' || this.props.viewOnly === 'edit' );  //是否填充内容
+    if(showContent){
+      setTimeout(function () {
+        // console.log("componentDidMount",_this.state);
+        _this.handleSelectChange(_this.state.desc);
       },500);
+    }
 
     // console.log("表单Props", this.props);
     this.props.dispatch({
@@ -120,10 +123,12 @@ class NormalProvideForm extends React.Component {
   }
 
   render() {
-    // console.log("NormalProvideForm:",this.props);
     const {getFieldDecorator} = this.props.form;
     const viewOnly = (this.props.viewOnly === 'on');  //是否仅可读
-    const inputStyle = viewOnly?{readOnly:true}:{}; //可读状态将input设置不可写
+    const showContent = (this.props.viewOnly === 'on' || this.props.viewOnly === 'edit');  //是否填充内容
+    const inputStyle = (this.props.viewOnly === 'on')?{readOnly:true}:{}; //可读状态将input设置不可写
+    // console.log("NormalProvideForm:",this.props,showContent);
+
 
     const formItemLayout = {
       labelCol: {
@@ -148,7 +153,7 @@ class NormalProvideForm extends React.Component {
         >
           {getFieldDecorator('title', {
             rules: [{required: true, message: '请简短描述您的需求!'}],
-            initialValue:viewOnly?this.state.title:''
+            initialValue:showContent?this.state.title:''
           })(
             <Input placeholder="简短描述您的需求" style={styles} {...inputStyle}/>
           )}
@@ -160,7 +165,7 @@ class NormalProvideForm extends React.Component {
           {getFieldDecorator('desc', {
             rules: [{
               required: true, message: '请完善您的需求描述',
-              initialValue:'默认值值'
+              initialValue:'默认值'
             }],
           })(
             <TextArea style={{minHeight: 48,marginLeft:'1.5rem'}} rows={6} {...inputStyle}/>

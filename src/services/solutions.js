@@ -62,3 +62,23 @@ export async function getMySolutionDetail(userId,reqId) {
     })
   })
 }
+
+//删除我的方案
+export async function deleteMySolution(solutionId) {
+  let access_token = Cookies.get("access_token");
+  return axios({
+    method: 'delete',
+    url: URL1 + `/api/solutions/${solutionId}`,
+    headers: {
+      Authorization: access_token
+    },
+  }).then((response) => {
+    // console.log("方案列表",response);
+    const {status,statusText} = response;
+    return Promise.resolve({
+      status,
+      statusText,
+      ...response.data
+    })
+  })
+}

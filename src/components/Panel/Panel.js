@@ -2,7 +2,7 @@ import React from "react";
 import "./panel.less";
 import {Button} from 'antd';
 import {withRouter} from "dva/router";
-import {queryString} from "../../utils/tools";
+import {queryString,timeStampToDate} from "../../utils/tools";
 import {connect} from "dva";
 
 function getReqType(code) {
@@ -86,7 +86,7 @@ export const PanelHeader = ({data}) => (
     <div className='panel-extra'>
       <span>66次浏览</span>
       {/*<span>8公司提供方案</span>*/}
-      <span>发布时间：{data.created_time}</span>
+      <span>发布时间：{timeStampToDate(data.created_time*1000).timeStr}</span>
     </div>
   </div>)
     :null

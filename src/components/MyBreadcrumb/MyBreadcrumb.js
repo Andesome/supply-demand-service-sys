@@ -8,16 +8,23 @@ import "./my-breadcrumb.less";
 class MyBreadcrumb extends React.Component{
 
   render(){
-    console.log("面包屑路径：",this.props.match.path);
     let path = this.props.match.path;
+    let pathArr = path.match(/\/[a-z]*/gi);
+    let str = '#';
+    // console.log("面包屑路径：",path,pathArr);
     return(
       <div className='bread-wrap'>
         <Breadcrumb>
-          <Breadcrumb.Item ><a href={'#/'}>首页</a></Breadcrumb.Item>
           {
-            path === "/"?
-              null:
-              <Breadcrumb.Item><a href={`#${path}`}>{routeConfig[path]}</a></Breadcrumb.Item>
+            path!=='/'?<Breadcrumb.Item ><a href={'#/'}>首页</a></Breadcrumb.Item>:null
+          }
+          {
+            pathArr.map((val,idx)=>{
+              return (<Breadcrumb.Item key={idx}>
+                <a href={str}>{routeConfig[val]}</a>
+              </Breadcrumb.Item>
+              )
+            })
           }
          {/* <Breadcrumb.Item><a href={path}>{routeConfig[path]}</a></Breadcrumb.Item>
           <Breadcrumb.Item><a href={'#/me'}>列表</a></Breadcrumb.Item>

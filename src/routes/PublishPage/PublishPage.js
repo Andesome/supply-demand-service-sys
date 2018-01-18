@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import MyBreadcrumb from "../../components/MyBreadcrumb/MyBreadcrumb";
 import WrappedNormalRequestForm from "../../components/NormalRequestForm/NormalRequestForm";
 import {Steps, Popover} from 'antd';
 import {connect} from "dva";
@@ -32,6 +33,7 @@ class PublishPage extends React.Component {
     return (
       <div>
         <Header/>
+        <MyBreadcrumb/>
         <div className='ly-container'>
           <Steps current={0} progressDot={customDot}>
             <Step title="In Progress" description="发布需求"/>

@@ -34,74 +34,49 @@ class ListItem extends React.Component {
   // 跳转到对应需求详情页
   jumpToDetail(reqId,solutionId) {
     if (this.props.viewOnly) {
-      this.props.history.push(`/provide?viewOnly=on&req_id=${reqId}&solution_id=${solutionId}`);
+      this.props.history.push(`/me/solution?req_id=${reqId}`);
     } else {
       this.props.history.push("/detail?req_id=" + reqId);
     }
   };
 
   //查看提案
-  viewSolution(solutionId,e){
+  viewSolution(reqId,e){
     e.stopPropagation();
-    this.jumpToDetail(11,4);
-    console.log("查看提案",solutionId);
+    this.jumpToDetail(reqId);
+    console.log("查看提案",reqId);
 
   }
 
-  //编辑提案
-  editSolution(solutionId,e){
+  //修改提案
+  editSolution(reqId,e){
     e.stopPropagation();
-    console.log("编辑提案",solutionId)
-
+    console.log("编辑提案",reqId);
+    this.props.history.push(`me/solution?viewOnly=edit&req_id=${reqId}`);
   }
 
-  //删除提案
+  //删除提案|撤销提案
   deleteSolution(solutionId,e){
     e.stopPropagation();
+    this.showDeleteConfirm(this.deleteFun.bind(this,solutionId),this.cancelDelete);
     console.log("删除提案",solutionId)
   }
-
-  //根据需求id删除需求
- /* handleDeleteReq(reqId, e) {
-    e.stopPropagation();
-
-    //弹窗：确定删除执行事件
-    function deleteReq(reqId) {
-      this.props.dispatch({
-        type: 'demand/deleteDemand',
-        reqId: reqId
-      })
-      console.log('你要删除' + reqId + '号需求');
-      message.success('删除成功');
-    }
-
-    //弹窗：取消删除执行事件
-    function cancelDelete() {
-      message.info('你取消了删除');
-    }
-
-    this.showDeleteConfirm(deleteReq.bind(this, reqId), cancelDelete);
+  //-弹窗：确定删除执行事件
+  deleteFun(solutionId) {
+    this.props.dispatch({
+      type: 'solutions/removeMySolution',
+      solutionId: solutionId
+    })
+    console.log('你要删除' + solutionId + '号方案');
+    message.success('删除成功');
+  }
+  //-弹窗：取消删除执行事件
+  cancelDelete() {
+    message.info('你取消了删除');
   }
 
-  //根据需求id编辑需求
-  handleEditReq(reqId, e) {
-    e.stopPropagation();
-    console.log('你要编辑' + reqId + '号需求');
-    Modal.info({
-      title: '你要编辑' + reqId + '号需求',
-      content: (
-        <div>
-          <p>编辑功能尚在开发中</p>
-          <p>敬请期待...</p>
-        </div>
-      ),
-      onOk() {
-      },
-    })*/
-  // }
-
   //删除全局提示框
-  /*showDeleteConfirm(okFunc, cancelFunc) {
+  showDeleteConfirm(okFunc, cancelFunc) {
     confirm({
       title: '确定要删除这条需求吗?',
       content: '删除后不可恢复',
@@ -115,7 +90,7 @@ class ListItem extends React.Component {
         cancelFunc();
       },
     });
-  }*/
+  }
 
   render() {
     // console.log("listItem",this.props);
@@ -203,7 +178,7 @@ class ListItem extends React.Component {
               期限:&nbsp;{getExceptCycle(data.except_cycle)}
             </span>
             <span
-              className={`type`}
+              className={`type price`}
               style={{float: 'right'}}
             >
               报价: &nbsp;￥{data.budget}
@@ -216,9 +191,9 @@ class ListItem extends React.Component {
           <p className='desc'>{data.desc}</p>
         </div>
         <div className='ft demand-remark'>
-          {/*<span>26 次浏览</span>*/}
           {/*<span>9 个公司提供方案</span>*/}
           <span>{data.created_time}</span>
+          <span>{getReqStatus(data.status)}</span>
           {
             this.props.location.pathname === "/me" ?
               (<div className='ly-btn-group'>
@@ -232,11 +207,11 @@ class ListItem extends React.Component {
                   size='small'
                   onClick={this.editSolution.bind(this, data.id)}
                 >
-                  编辑提案
+                  修改提案
                 </Button>
                 <Button
                   size='small'
-                  onClick={this.deleteSolution.bind(this, data.id)}
+                  onClick={this.deleteSolution.bind(this, data.solution_id)}
                 >
                   撤销提案
                 </Button>

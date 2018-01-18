@@ -15,13 +15,13 @@ export const REGISTER_URL = URL + '/register';
 export const LOGOUT_URL = URL + '/logout';
 
 //前端登录验证URL
-export const NEXT_URL = 'http://localhost:8000/#/test';
+export const NEXT_URL = 'http://66.112.216.3:8000/#/test';
 
 //前端首页URL
-export const HOME_PAGE = 'http://localhost:8000/#/';
+export const HOME_PAGE = 'http://66.112.216.3:8000/#/';
 
 //前端验证URL
-export const VERIFY_PAGE = 'http://localhost:8000/#/test';
+export const VERIFY_PAGE = 'http://66.112.216.3:8000/#/test';
 
 //文件服务器URL
 export const FILE_SERVER = '//imgcdn.robo2025.com/';

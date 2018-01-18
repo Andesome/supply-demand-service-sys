@@ -5,7 +5,8 @@ export default {
 
   state:{
     demandList:[],
-    myDemandList:[]
+    myDemandList:[],
+    total:0
   },
 
   effects: {
@@ -16,8 +17,9 @@ export default {
         payload: response,
       });
     },
-    *getAllDemands(_,{call,put}){
-      const response = yield call(getAllDemand);
+    *getAllDemands({offset,limit},{call,put}){
+      const response = yield call(getAllDemand,offset,limit);
+      console.log("model所有需求响应、",response);
       yield put({
         type: 'saveAll',
         payload: response,
@@ -52,6 +54,7 @@ export default {
       return {
         ...state,
         demandList: [...action.payload.data],
+        total:action.payload.headers["x-content-total"]>>0
       };
     },
     saveMyDemands(state,action){

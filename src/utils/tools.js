@@ -60,3 +60,19 @@ export function checkFile(filename,fileArr){
     }
   }
 }
+
+
+//时间戳转年月日时分秒
+export function timeStampToDate(timeStamp) {
+  let date = new Date(timeStamp);
+  let time = {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    week: date.getDay(),
+    H: date.getHours(),
+    M: date.getMinutes(),
+    S: date.getSeconds()
+  };
+  return {...time,timeStr:`${time.year}-${time.month}-${time.day} ${time.H}:${time.M}:${time.S}`}
+}
