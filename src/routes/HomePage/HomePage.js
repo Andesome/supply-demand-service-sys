@@ -31,8 +31,8 @@ class HomePage extends React.Component{
   componentDidMount(){
     // console.log(this.props);
     this.props.dispatch({
-      type:'user/fetch'
-    })
+          type:'user/fetch'
+      })
   }
 
   render(){

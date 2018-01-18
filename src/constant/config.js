@@ -14,8 +14,8 @@ export const REGISTER_URL = URL + '/register';
 //登录接口URL
 export const LOGOUT_URL = URL + '/logout';
 
-// let myHost = "http://localhost:8000";
-let myHost = 'http://66.112.216.3:8000';
+let myHost = "http://localhost:8000";
+// let myHost = 'http://66.112.216.3:8000';
 //前端登录验证URL
 export const NEXT_URL = myHost+'/#/test';
 

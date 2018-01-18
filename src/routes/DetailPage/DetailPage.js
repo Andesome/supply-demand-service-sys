@@ -5,6 +5,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import SolutionList from "../../components/SolutionList/SolutionList";
 import MyBreadcrumb from "../../components/MyBreadcrumb/MyBreadcrumb";
+import TopBar from "../../components/TopBar/TopBar";
 import {withRouter} from "dva/router";
 import {queryString} from "../../utils/tools";
 import {connect} from "dva";
@@ -109,6 +110,7 @@ class DetailPage extends React.Component {
     console.log("详情页", this.props);
     return (
       <div className='detail-page'>
+        <TopBar data={this.props.user.userinfo} />
         <Header/>
         <MyBreadcrumb/>
         <Content>

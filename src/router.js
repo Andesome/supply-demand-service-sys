@@ -16,15 +16,15 @@ export default function RouterConfig({history, app}) {
   /* 定义路由配置 */
   const routes = [{
     path: "/publish",
-    models: () => [import('./models/upload')],
+    models: () => [import('./models/upload'),import('./models/user')],
     component: () => (PublishPage)
   }, {
     path: "/me",
-    models: () => [import('./models/solutions'), import("./models/me")],
+    models: () => [import('./models/solutions'), import("./models/me"),import('./models/user')],
     component: () => (MePage)
   }, {
     path: "/me/req",
-    models: () => [import('./models/me')],
+    models: () => [import('./models/me'),import('./models/user')],
     component: () => (DetailPage)
   },{
     path: "/me/solution",
@@ -61,7 +61,7 @@ export default function RouterConfig({history, app}) {
           />
           {
             routes.map(({path, exact, ...dynamics}, key) => {
-              console.log(path, exact);
+              // console.log(path, exact);
               return (
                 <Route
                   key={key}

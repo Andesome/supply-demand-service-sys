@@ -11,7 +11,7 @@ class MyBreadcrumb extends React.Component{
     let path = this.props.match.path;
     let pathArr = path.match(/\/[a-z]*/gi);
     let str = '#';
-    // console.log("面包屑路径：",path,pathArr);
+    console.log("面包屑路径：",path,pathArr);
     return(
       <div className='bread-wrap'>
         <Breadcrumb>
@@ -20,6 +20,7 @@ class MyBreadcrumb extends React.Component{
           }
           {
             pathArr.map((val,idx)=>{
+                str+=val;
               return (<Breadcrumb.Item key={idx}>
                 <a href={str}>{routeConfig[val]}</a>
               </Breadcrumb.Item>

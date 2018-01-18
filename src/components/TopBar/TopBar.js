@@ -4,7 +4,9 @@ import {connect} from "dva";
 import {logout,login} from "../../services/user";
 import "./topbar.css";
 
-@connect()
+@connect(
+  state=>({...state})
+)
 export default class TopBar extends React.Component {
   constructor(props){
     super(props);
@@ -21,12 +23,19 @@ export default class TopBar extends React.Component {
     login();
   }
 
+  componentDidMount(){
+    // console.log(this.props);
+    this.props.dispatch({
+      type:'user/fetch'
+    })
+  }
 
   render() {
-    let user = this.props.data;
+    console.log(this.props);
+    let user = this.props.user.userinfo;
     return (
       <div className="container">
-        <span className="welcome">欢迎光临工业魔方-智能方案解决中心</span>
+        <span className="welcome">{/*欢迎光临工业魔方-智能方案解决中心*/}</span>
         {
           user.id ?
             <div className="topBar-right">

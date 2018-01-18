@@ -5,6 +5,7 @@ import MyBreadcrumb from "../../components/MyBreadcrumb/MyBreadcrumb";
 import WrappedNormalRequestForm from "../../components/NormalRequestForm/NormalRequestForm";
 import {Steps, Popover} from 'antd';
 import {connect} from "dva";
+import TopBar from "../../components/TopBar/TopBar";
 const Step = Steps.Step;
 
 
@@ -32,6 +33,7 @@ class PublishPage extends React.Component {
     console.log("PublishPage",this.props);
     return (
       <div>
+        <TopBar/>
         <Header/>
         <MyBreadcrumb/>
         <div className='ly-container'>
