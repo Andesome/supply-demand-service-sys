@@ -6,7 +6,9 @@ export default {
   state:{
     demandList:[],
     myDemandList:[],
-    total:0
+    total:0,
+    offset:0,
+    limit:15
   },
 
   effects: {
@@ -23,6 +25,8 @@ export default {
       yield put({
         type: 'saveAll',
         payload: response,
+        offset:offset,
+        limit:limit
       });
     },
     *getMyDemands({userId},{call,put}){
@@ -54,13 +58,15 @@ export default {
       return {
         ...state,
         demandList: [...action.payload.data],
-        total:action.payload.headers["x-content-total"]>>0
+        total:action.payload.headers["x-content-total"]>>0,
+        offset:action.offset>>0,
+        limit:action.limit>>0
       };
     },
     saveMyDemands(state,action){
       return {
         ...state,
-        myDemandList:[...action.payload.data]
+        myDemandList:[...action.payload.data],
       }
     },
     deleteMyDemand(state,action){

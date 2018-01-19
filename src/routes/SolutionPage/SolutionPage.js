@@ -32,7 +32,7 @@ class SolutionPage extends React.Component{
       <div className='solution-box'>
         {
           data.length<1?
-            <TipPanel tip="你还没有提交过方案"/>:
+            <TipPanel tip="您还没有提交过方案"/>:
             <MySolutionList data={data} viewOnly={true} />
         }
       </div>

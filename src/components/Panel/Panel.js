@@ -65,7 +65,7 @@ export class Panel extends React.Component {
             null
             :
             <Button className='absolute' onClick={() => {
-              this.props.history.push("provide?req_id="+this.props.reqId);
+              this.props.history.push("provide?page="+args.page+"&req_id="+this.props.reqId);
             }}>我要提方案</Button>
         }
 

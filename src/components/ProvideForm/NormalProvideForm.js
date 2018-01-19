@@ -126,9 +126,9 @@ class NormalProvideForm extends React.Component {
     const {getFieldDecorator} = this.props.form;
     const viewOnly = (this.props.viewOnly === 'on');  //是否仅可读
     const showContent = (this.props.viewOnly === 'on' || this.props.viewOnly === 'edit');  //是否填充内容
-    const inputStyle = (this.props.viewOnly === 'on')?{readOnly:true}:{}; //可读状态将input设置不可写
+    const inputStyle = (this.props.viewOnly === 'on')?{readOnly:true,autosize:true}:{}; //可读状态将input设置不可写
+    const style2 = (this.props.viewOnly === 'on')?{border:'none',borderRadius:0,minHeight:'auto'}:{};
     // console.log("NormalProvideForm:",this.props,showContent);
-
 
     const formItemLayout = {
       labelCol: {
@@ -142,8 +142,10 @@ class NormalProvideForm extends React.Component {
       },
     };
     const styles = {
-      marginLeft:'1.5rem'
+      marginLeft:'1.5rem',
+      ...style2
     };
+
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -168,7 +170,7 @@ class NormalProvideForm extends React.Component {
               initialValue:'默认值'
             }],
           })(
-            <TextArea style={{minHeight: 48,marginLeft:'1.5rem'}} rows={6} {...inputStyle}/>
+            <TextArea style={{minHeight: 48,...styles}} rows={6} {...inputStyle}/>
           )}
         </FormItem>
         {

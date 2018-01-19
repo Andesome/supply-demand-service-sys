@@ -107,13 +107,13 @@ class DetailPage extends React.Component {
 
   render() {
     let args = this.state.args;
-    console.log("详情页", this.props);
+    // console.log("详情页", this.props);
     return (
       <div className='detail-page'>
-        <TopBar data={this.props.user.userinfo} />
+        <TopBar/>
         <Header/>
         <MyBreadcrumb/>
-        <Content>
+        <Content className='req-content'>
           {
             this.props.match.path === '/me/req' ?
               <ButtonGroup style={{float: 'right'}}>
@@ -121,18 +121,19 @@ class DetailPage extends React.Component {
                 <Button onClick={this.handleDeleteReq.bind(this,args.req_id)}>撤销需求</Button>
               </ButtonGroup> : null
           }
-
           <Panel reqId={args.req_id}/>
+        </Content>
           {
-            args.viewOnly === 'on' ?
-              <div className='solutions-wrap'>
-                <h2 className='title'>已提供方案列表</h2>
-                <SolutionList data={this.props.me.reqSolutions}/>
-              </div>
+            this.props.match.path === '/me/req' ?
+              <Content className='solution-content'>
+                <div className='solutions-wrap'>
+                  <h2 className='title'>已提供方案列表</h2>
+                  <SolutionList data={this.props.me.reqSolutions}/>
+                </div>
+              </Content>
               :
               null
           }
-        </Content>
         <Footer/>
       </div>
     )

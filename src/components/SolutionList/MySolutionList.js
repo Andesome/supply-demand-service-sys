@@ -2,6 +2,7 @@ import React from "react";
 import "./my-solution-list.less";
 import {withRouter} from "dva/router";
 import {connect} from "dva";
+import QueueAnim from 'rc-queue-anim';
 import {Button, Modal, message, Badge} from "antd";
 
 const confirm = Modal.confirm;
@@ -11,11 +12,17 @@ const List = ({data, dispatch, viewOnly}) => {
   // console.log("List组件:",data);
   return (
     <div className='demand-list'>
+      <QueueAnim
+        delay={300}
+        className="queue-simple"
+        duration={1000}
+      >
       {
         data.map((val, idx) => {
           return <ListItem key={idx} index={idx} viewOnly={viewOnly} data={val} dispatch={dispatch}/>
         })
       }
+      </QueueAnim>
     </div>
   )
 };

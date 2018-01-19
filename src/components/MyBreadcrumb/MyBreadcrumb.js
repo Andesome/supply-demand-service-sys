@@ -11,12 +11,12 @@ class MyBreadcrumb extends React.Component{
     let path = this.props.match.path;
     let pathArr = path.match(/\/[a-z]*/gi);
     let str = '#';
-    console.log("面包屑路径：",path,pathArr);
+    // console.log("面包屑路径：",path,pathArr);
     return(
       <div className='bread-wrap'>
         <Breadcrumb>
           {
-            path!=='/'?<Breadcrumb.Item ><a href={'#/'}>首页</a></Breadcrumb.Item>:null
+            path!=='/'?<Breadcrumb.Item ><a href={'#/'}>{routeConfig["/"]}</a></Breadcrumb.Item>:null
           }
           {
             pathArr.map((val,idx)=>{

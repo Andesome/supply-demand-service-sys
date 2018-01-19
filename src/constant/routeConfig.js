@@ -1,5 +1,5 @@
 export const routeConfig = {
-  "/":'首页',
+  "/":'智能方案中心',
   "/detail":'需求详情',
   "/provide":'提交方案',
   "/publish":'发布需求',

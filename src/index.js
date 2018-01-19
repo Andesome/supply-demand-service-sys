@@ -1,16 +1,17 @@
 import dva from 'dva';
 import './index.css';
 import "./normalize.css";
-import Cookies from "js-cookie";
-import {jumpToVerify} from "./utils/tools";
+import createLoading from 'dva-loading'
+import "./utils/interceptors";
 
 // 1. Initialize
-const app = dva();
+const app = dva({
+  ...createLoading({
+    effects: true,
+  }),
+});
 
-/* 验证登录 */
-if(!Cookies.get('access_token')){
-  jumpToVerify();
-}
+
 
 // 2. Plugins
 // app.use({});

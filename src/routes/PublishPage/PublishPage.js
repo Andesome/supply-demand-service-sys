@@ -9,8 +9,8 @@ import TopBar from "../../components/TopBar/TopBar";
 const Step = Steps.Step;
 
 
-const customDot = (dot, {status, index}) => (
-  <Popover content={<span>step {index} status: {status}</span>}>
+const customDot = (dot, {status, index ,title}) => (
+  <Popover content={<span>第{index+1}步 : {title}</span>}>
     {dot}
   </Popover>
 );
@@ -37,11 +37,11 @@ class PublishPage extends React.Component {
         <Header/>
         <MyBreadcrumb/>
         <div className='ly-container'>
-          <Steps current={0} progressDot={customDot}>
-            <Step title="In Progress" description="发布需求"/>
-            <Step title="Waiting" description="平台审核需求"/>
-            <Step title="Waiting" description="发布成功"/>
-            <Step title="Waiting" description="选择服务商家方案"/>
+          <Steps current={0} size='small' progressDot={customDot}>
+            <Step  title="发布需求"/>
+            <Step title="平台审核需求"/>
+            <Step title="发布成功"/>
+            <Step title="选择服务商家方案"/>
           </Steps>
           <WrappedNormalRequestForm/>
         </div>

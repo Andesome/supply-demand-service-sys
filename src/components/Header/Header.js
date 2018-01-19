@@ -1,19 +1,25 @@
 import React from "react";
 import {Navbar, Nav, NavItem} from "react-bootstrap";
 import {connect} from "dva";
+import {queryString} from "../../utils/tools";
 import "./header.css";
 
 @connect()
 export default class Header extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      args:queryString.parse(window.location.href)
+    }
   }
 
   componentDidMount() {
-    console.log("头部渲染好了");
+    console.log("头部渲染好了",this.state.args.page);
+    let page = this.state.args.page?this.state.args.page:1;
+    let pageSize = 15;
     this.props.dispatch({
       type: 'demand/getAllDemands',
-      offset:'0',
+      offset:(page-1)*pageSize,
       limit:'15'
     });
   }

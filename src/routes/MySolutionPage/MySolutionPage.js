@@ -1,5 +1,5 @@
 import React from "react";
-import {Layout} from "antd";
+import {Layout,message,Modal} from "antd";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import MySolutionList from "../../components/SolutionList/MySolutionList";
@@ -12,6 +12,8 @@ import "./my-solution-page.less"
 import {connect} from "dva";
 const ButtonGroup = Button.Group;
 const {Content} = Layout;
+const confirm = Modal.confirm;
+
 
 //将服务器代码转换成需求状态
 function getSolutionStatus(code) {
@@ -32,6 +34,7 @@ class MySolutionPage extends React.Component {
   constructor(props){
     super(props);
     this.handleEditForm = this.handleEditForm.bind(this);
+    this.handleDeleteSolution = this.handleDeleteSolution.bind(this);
     this.state = {
       args : queryString.parse(window.location.href),
       viewOnly:'on'
@@ -41,6 +44,47 @@ class MySolutionPage extends React.Component {
   //修改表单状态为可编辑
   handleEditForm(){
     this.setState({viewOnly:'edit'})
+  }
+
+  //根据方案id删除方案
+  handleDeleteSolution(solution, e) {
+    e.stopPropagation();
+    let solutionId = solution.id;
+    //弹窗：确定删除执行事件
+    function deleteSolution(solutionId) {
+      this.props.dispatch({
+        type: 'solutions/removeMySolution',
+        solutionId: solutionId
+      })
+      console.log('你要删除' + solutionId + '号方案');
+      console.log(solutionId);
+      message.success('删除成功');
+      this.props.history.push("/me?tab=2");
+    }
+
+    //弹窗：取消删除执行事件
+    function cancelDelete() {
+      message.info('你取消了删除');
+    }
+
+    this.showDeleteConfirm(deleteSolution.bind(this, solutionId), cancelDelete);
+  }
+
+  //删除全局提示框
+  showDeleteConfirm(okFunc, cancelFunc) {
+    confirm({
+      title: '确定要撤销这条方案吗?',
+      content: '撤销后不可恢复',
+      okText: '撤销',
+      okType: 'danger',
+      cancelText: '返回',
+      onOk() {
+        okFunc();
+      },
+      onCancel() {
+        cancelFunc();
+      },
+    });
   }
 
   componentDidMount(){
@@ -65,8 +109,6 @@ class MySolutionPage extends React.Component {
     let solutionList = [];
     req?solutionList[0]=req:null;
 
-
-
     return (
       <div className='my-solution-page'>
         <Header/>
@@ -74,7 +116,7 @@ class MySolutionPage extends React.Component {
         <Content>
           <ButtonGroup style={{float:'right'}}>
             <Button onClick={this.handleEditForm}>修改提案</Button>
-            <Button>撤销提案</Button>
+            <Button onClick={this.handleDeleteSolution.bind(this,solution)}>撤销提案</Button>
           </ButtonGroup>
           <PageHeader>
             用户需求

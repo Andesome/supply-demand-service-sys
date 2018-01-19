@@ -2,6 +2,7 @@ import React from "react";
 import {Layout} from "antd";
 import './footer.css';
 import {LOGIN_URL,REGISTER_URL,NEXT_URL} from "../../constant/config";
+import {login,register} from "../../services/user";
 
 const {Content} = Layout;
 // 页脚组件
@@ -19,9 +20,9 @@ class Footer extends React.Component {
           <div className="footer-center">
             <a href="javascript:void (0);">关于我们</a>
             <span>|</span>
-            <a href={`${REGISTER_URL}?next=${LOGIN_URL}?next=${NEXT_URL}`}>注册新用户</a>
+            <a onClick={register}>注册新用户</a>
             <span>|</span>
-            <a href={`${LOGIN_URL}?next=${NEXT_URL}`}>用户登录</a>
+            <a onClick={login}>用户登录</a>
             <span>|</span>
             <a href="javascript:void (0);">联系我们</a>
             <p>京ICP备17065244号-1 | copyright © 湖南孚中版权所有. all right reserved.</p>

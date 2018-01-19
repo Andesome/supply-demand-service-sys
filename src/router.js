@@ -36,7 +36,7 @@ export default function RouterConfig({history, app}) {
     component: () => (ProvidePlanPage)
   }, {
     path: "/detail",
-    models: () => [import('./models/me')],
+    models: () => [import('./models/me'),import('./models/user')],
     component: () => (DetailPage)
   }, {
     path: "/test",
