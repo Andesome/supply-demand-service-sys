@@ -89,11 +89,12 @@ class DetailPage extends React.Component {
     // console.log("详情页面渲染好了--", this.state, this.props);
     let userId = window.sessionStorage.getItem("user_id");
     //从服务器获取我的需求列表
-    //请求我的需求列表
+    //请求需求详情
     this.props.dispatch({
-      type: "demand/getMyDemands",
-      userId: userId
+      type:"demand/fetchDemandDetail",
+      reqId:this.state.args.req_id
     });
+
 
     if (this.state.args.viewOnly === 'on') {
       //请求解决方案
@@ -121,7 +122,7 @@ class DetailPage extends React.Component {
                 <Button onClick={this.handleDeleteReq.bind(this,args.req_id)}>撤销需求</Button>
               </ButtonGroup> : null
           }
-          <Panel reqId={args.req_id}/>
+          <Panel reqId={args.req_id} data={this.props.demand.detail}/>
         </Content>
           {
             this.props.match.path === '/me/req' ?

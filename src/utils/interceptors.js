@@ -20,6 +20,7 @@ axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   // 请求错误服务器返回的信息
+  console.log("服务器错误",error);
   let response = error.response;
   /*
   * 如果响应头是以200开头，则是登录验证出了问题，跳转到登录页面

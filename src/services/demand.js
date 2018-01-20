@@ -84,3 +84,23 @@ export async function removeDemand(reqId) {
     })
   })
 }
+
+//获取需求详情
+export async function getDemandDetail(reqId) {
+  let access_token = Cookies.get("access_token");
+  return axios({
+    method: 'get',
+    url: URL1 + `/api/reqs/${reqId}`,
+    headers: {
+      Authorization: access_token
+    },
+  }).then((response) => {
+    // console.log("删除需求响应",response);
+    const {status,statusText} = response;
+    return Promise.resolve({
+      status,
+      statusText,
+      ...response.data
+    })
+  })
+}

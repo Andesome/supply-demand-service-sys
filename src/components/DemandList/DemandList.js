@@ -196,7 +196,7 @@ class ListItem extends React.Component {
           <p className='desc'>{data.desc}</p>
         </div>
         <div className='ft demand-remark'>
-          <span>26 次浏览</span>
+          <span>{data.views} 次浏览</span>
           {/*<span>9 个公司提供方案</span>*/}
           <span>{timeStampToDate(data.created_time * 1000).timeStr}</span>
           {

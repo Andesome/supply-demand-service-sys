@@ -16,7 +16,8 @@ export const REGISTER_URL = URL + '/register';
 //登录接口URL
 export const LOGOUT_URL = URL + '/logout';
 
-let myHost = "http://frp2.wpcenter.cn:8018/";
+// let myHost = "http://frp2.wpcenter.cn:8018";
+let myHost = "http://192.168.4.10:8000";
 // let myHost = 'http://66.112.216.3:8000';
 //前端登录验证URL
 export const NEXT_URL = myHost+'/#/test';

@@ -11,7 +11,7 @@ import "./provide-plan-page.less";
 const {Content} = Layout;
 
 @connect(
-  state=>({demandList:state.demand.demandList,reqSolution:state.solutions.reqSolution})
+  state=>({demandList:state.demand.demandList,reqSolution:state.solutions.reqSolution,me:state.me})
 )
 class ProvidePlanPage extends React.Component{
   constructor(props){
@@ -22,21 +22,12 @@ class ProvidePlanPage extends React.Component{
   }
 
   componentDidMount(){
-
     this.props.dispatch({
-      type: "me/saveSolutions",
-      reqId: this.state.args.req_id
-    })
+      type: "me/fetchMyReqSolution",
+      reqId: this.state.args.req_id,
+      solutionId:this.state.args.solution_id
+    });
 
-    let userId = window.sessionStorage.getItem("user_id");
-    if(this.state.args.viewOnly==='on'){
-      //请求我的方案详情
-      this.props.dispatch({
-        type: "solutions/fetchSolutionDetail",
-        userId: userId,
-        reqId:this.state.args.req_id
-      });
-    }
   }
 
   render(){
@@ -44,7 +35,7 @@ class ProvidePlanPage extends React.Component{
     let currReqData = this.props.demandList.filter((val)=>{
       return val.id == args["req_id"];
     });
-    // console.log("ProvidePlanPage",this.props);
+    // console.log("ProvidePlanPage：",this.props);
 
     return(
       <div className='provide-plan-page'>
@@ -54,7 +45,7 @@ class ProvidePlanPage extends React.Component{
           <div className='ly-panel'>
             <PanelHeader data={currReqData[0]}/>
           </div>
-          <WrappedNormalProvideForm {...args} {...this.props}/>
+          <WrappedNormalProvideForm {...args} {...this.props} data={this.props.me.myReqSolution}/>
         </Content>
         <Footer/>
       </div>

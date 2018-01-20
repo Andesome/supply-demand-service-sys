@@ -1,4 +1,4 @@
-import {postDemand,getAllDemand,getMyDemand,removeDemand} from "../services/demand";
+import {postDemand,getAllDemand,getMyDemand,removeDemand,getDemandDetail} from "../services/demand";
 
 export default {
   namespace: 'demand',
@@ -8,7 +8,8 @@ export default {
     myDemandList:[],
     total:0,
     offset:0,
-    limit:15
+    limit:15,
+    detail:{}
   },
 
   effects: {
@@ -19,9 +20,17 @@ export default {
         payload: response,
       });
     },
+    *fetchDemandDetail({reqId},{call,put}){
+      console.log("fetchDemandDetail",reqId)
+      const response = yield call(getDemandDetail,reqId);
+      yield put({
+        type: 'saveDetail',
+        payload: response
+      });
+    },
     *getAllDemands({offset,limit},{call,put}){
       const response = yield call(getAllDemand,offset,limit);
-      console.log("model所有需求响应、",response);
+      // console.log("model所有需求响应:",response);
       yield put({
         type: 'saveAll',
         payload: response,
@@ -75,6 +84,12 @@ export default {
         myDemandList:state.myDemandList.filter((val)=>{
           return val.id !== action.reqId>>0;
         })
+      }
+    },
+    saveDetail(state,action){
+      return{
+        ...state,
+        detail:action.payload.data
       }
     }
   }

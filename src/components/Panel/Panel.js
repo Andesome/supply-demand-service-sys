@@ -47,19 +47,12 @@ export class Panel extends React.Component {
 
   render() {
     let args = queryString.parse(window.location.href);
-    let currReqData = this.props.demandList.filter((val)=>{
-      return val.id == this.props.reqId;
-    });
-    if(currReqData.length<1){
-      currReqData = this.props.myDemandList.filter((val)=>{
-        return val.id == this.props.reqId;
-      });
-    }
-    // console.log("Panel",this.props,currReqData);
+    let currReqData = this.props.data;
+    console.log("Panel",currReqData);
     return (
       <div className='ly-panel'>
-        <PanelHeader data={currReqData[0]}/>
-        <PanelBody data={currReqData[0]}/>
+        <PanelHeader data={currReqData}/>
+        <PanelBody data={currReqData}/>
         {
           args.viewOnly === "on" ?
             null
@@ -84,7 +77,7 @@ export const PanelHeader = ({data}) => (
       <li className='type'><b>需求类型</b>：{getReqType(data.req_type)}</li>
     </ul>
     <div className='panel-extra'>
-      <span>66次浏览</span>
+      <span>{data.views}次浏览</span>
       {/*<span>8公司提供方案</span>*/}
       <span>发布时间：{timeStampToDate(data.created_time*1000).timeStr}</span>
     </div>
