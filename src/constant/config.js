@@ -1,9 +1,14 @@
+/*
+* sso：      https://login.robo2025.com
+* 需求发布API：http://139.199.96.235:9002
+* */
+
 //单点登录URL
-export const URL = 'http://120.27.46.167:8011';
+export const URL = 'https://login.robo2025.com';
 // export const URL = 'http://192.168.3.70:8011';
 
 //网站内容接口URL
-export const URL1 = 'http://120.27.46.167:8020';
+export const URL1 = 'http://139.199.96.235:9002';
 // export const URL1 = 'http://192.168.3.70:8020';
 // export const LOGIN_URL = 'https://login.robo2025.com';
 

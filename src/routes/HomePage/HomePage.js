@@ -48,7 +48,7 @@ class HomePage extends React.Component{
   render(){
     return(
       <div className='home-page'>
-        <Spin spinning={this.props.loading.global}>
+        <Spin spinning={this.props.loading.global} size={'large'}>
           <TopBar data={this.props.userinfo} />
           <Header/>
           <MyBreadcrumb/>

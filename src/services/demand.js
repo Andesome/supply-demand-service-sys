@@ -34,7 +34,7 @@ export async function getAllDemand(offset,limit) {
       Authorization: access_token,
     },
   }).then((response) => {
-    console.log("获取所有需求列表响应：",response);
+    // console.log("获取所有需求列表响应：",response);
     const {status,statusText,headers} = response;
     return Promise.resolve({
       status,
